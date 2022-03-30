@@ -6,9 +6,27 @@ using FMODUnity;
 
 public class AudioManager : MonoBehaviour
 {
+
+    private static AudioManager instance;
+    public static AudioManager Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
     [SerializeField] private SoundType[] Sounds;
-    //public EventReference eventReference;
-    //[SerializeField] private string sfxEvent = null;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            return;
+        }
+        Destroy(gameObject);
+    }
     public void PlaySFX(Sounds sound)
     {
         SoundType item = Array.Find(Sounds, i => i.soundType == sound);
@@ -34,6 +52,7 @@ public class SoundType
 public enum Sounds
 {
     ButtonClick,
+    ButtonBack,
     LevelSelection,
     Music,
     PlayerMove,
