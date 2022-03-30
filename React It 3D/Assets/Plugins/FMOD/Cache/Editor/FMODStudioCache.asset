@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: Assets/Fmod/React It 3D-Fmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637841044235316588
+  lastModified: 637842791714630678
   FileSizes:
   - Name: Desktop
-    Value: 756
+    Value: 812
   Exists: 1
 --- !u!114 &-4281951058708396913
 MonoBehaviour:
@@ -35,10 +35,10 @@ MonoBehaviour:
   Path: Assets/Fmod/React It 3D-Fmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637841044235296652
+  lastModified: 637842791714600772
   FileSizes:
   - Name: Desktop
-    Value: 12864
+    Value: 2319168
   Exists: 1
 --- !u!114 &-2815706523768328391
 MonoBehaviour:
@@ -66,7 +66,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1999
+  Length: 999
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,10 +84,38 @@ MonoBehaviour:
   - {fileID: -4281951058708396913}
   EditorEvents:
   - {fileID: -2815706523768328391}
+  - {fileID: 2773773978657059265}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4281951058708396913}
   StringsBanks:
   - {fileID: -4764800144884032540}
-  cacheTime: 637841044235316588
+  cacheTime: 637842791714630678
   cacheVersion: 10
+--- !u!114 &2773773978657059265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MainMenuMusic
+  m_EditorClassIdentifier: 
+  Path: event:/MainMenuMusic
+  Guid:
+    Data1: -206896360
+    Data2: 1222721428
+    Data3: -263207513
+    Data4: -1822181227
+  Banks:
+  - {fileID: -4281951058708396913}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 176017
