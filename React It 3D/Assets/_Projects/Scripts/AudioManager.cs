@@ -34,11 +34,9 @@ public class AudioManager : MonoBehaviour
         {
             item.sfxEvent = item.eventReference.Path;
             RuntimeManager.PlayOneShot(item.sfxEvent);
+            return;
         }
-        else
-        {
-            Debug.LogError("Clip not found on soundType: " + sound);
-        }
+        Debug.LogError("Clip not found on soundType: " + sound);
     }
 }
 
