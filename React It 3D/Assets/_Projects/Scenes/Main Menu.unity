@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 138745614}
+  attenuationObject: {fileID: 0}
   ListenerNumber: -1
 --- !u!20 &79365003
 Camera:
@@ -446,7 +446,7 @@ MonoBehaviour:
         Data3: 549379005
         Data4: 344019991
       Path: event:/UI_Play
-    sfxEvent: 
+    playSound: 
   - soundType: 1
     eventReference:
       Guid:
@@ -455,7 +455,7 @@ MonoBehaviour:
         Data3: 1086139021
         Data4: -1359722355
       Path: event:/UI_OptionClose
-    sfxEvent: 
+    playSound: 
   - soundType: 3
     eventReference:
       Guid:
@@ -464,7 +464,16 @@ MonoBehaviour:
         Data3: -263207513
         Data4: -1822181227
       Path: event:/MainMenuMusic
-    sfxEvent: 
+    playSound: 
+  - soundType: 6
+    eventReference:
+      Guid:
+        Data1: 1490148129
+        Data2: 1091335720
+        Data3: 320603037
+        Data4: 152160156
+      Path: event:/Scene01_Music
+    playSound: 
 --- !u!1 &148254336
 GameObject:
   m_ObjectHideFlags: 0

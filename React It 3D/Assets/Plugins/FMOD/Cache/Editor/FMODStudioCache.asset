@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: Assets/Fmod/React It 3D-Fmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637847917961973097
+  lastModified: 637847962242657136
   FileSizes:
   - Name: Desktop
-    Value: 914
+    Value: 958
   Exists: 1
 --- !u!114 &-4281951058708396913
 MonoBehaviour:
@@ -35,11 +35,38 @@ MonoBehaviour:
   Path: Assets/Fmod/React It 3D-Fmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637847917961953181
+  lastModified: 637847962242627206
   FileSizes:
   - Name: Desktop
     Value: 2320160
   Exists: 1
+--- !u!114 &-3697175228443981915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Scene01_Music
+  m_EditorClassIdentifier: 
+  Path: event:/Scene01_Music
+  Guid:
+    Data1: 1490148129
+    Data2: 1091335720
+    Data3: 320603037
+    Data4: 152160156
+  Banks:
+  - {fileID: 4492200746648178087}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 215823
 --- !u!114 &-2815706523768328391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,12 +114,13 @@ MonoBehaviour:
   - {fileID: -2815706523768328391}
   - {fileID: 2773773978657059265}
   - {fileID: 4169159330442066891}
+  - {fileID: -3697175228443981915}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4281951058708396913}
   StringsBanks:
   - {fileID: -4764800144884032540}
-  cacheTime: 637847917962222430
+  cacheTime: 637847962243085981
   cacheVersion: 10
 --- !u!114 &2773773978657059265
 MonoBehaviour:
@@ -164,8 +192,8 @@ MonoBehaviour:
   Path: Assets/Fmod/React It 3D-Fmod/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637847917962222430
+  lastModified: 637847962243085981
   FileSizes:
   - Name: Desktop
-    Value: 2306976
+    Value: 5177696
   Exists: 1

@@ -8,7 +8,7 @@ public class MainMenuController : MonoBehaviour
     private void Start()
     {
         optionPanel.SetActive(false);
-        AudioManager.Instance.PlayMusic(Sounds.Music);
+        AudioManager.Instance.PlayMusic(Sounds.Music, this.gameObject);
     }
     
     public void PlayButton()

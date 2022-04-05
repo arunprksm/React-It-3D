@@ -16,8 +16,10 @@ public class AudioManager : MonoBehaviour
         }
     }
     [SerializeField] private SoundType[] Sounds;
-    private static FMOD.Studio.EventInstance Music;
-    //[SerializeField] private StudioEventEmitter studioEventEmitter;
+    //internal FMOD.Studio.EventInstance Music;
+
+    private FMOD.Studio.EVENT_CALLBACK eventCallback;
+    private FMOD.Studio.EventInstance Music;
 
     private void Awake()
     {
@@ -29,34 +31,53 @@ public class AudioManager : MonoBehaviour
         }
         Destroy(gameObject);
     }
-    private void Start()
-    {
-        //studioEventEmitter = GetComponent<StudioEventEmitter>();
-    }
     public void PlaySFX(Sounds sound)
     {
         SoundType item = Array.Find(Sounds, i => i.soundType == sound);
-        if (item.sfxEvent != null)
+        if (item.playSound != null)
         {
-            item.sfxEvent = item.eventReference.Path;
-            RuntimeManager.PlayOneShot(item.sfxEvent);
+            item.playSound = item.eventReference.Path;
+            RuntimeManager.PlayOneShot(item.playSound);
             return;
         }
         Debug.LogError("Clip not found on soundType: " + sound);
     }
-    public void PlayMusic(Sounds sound)
+    //public void PlayMusic(Sounds sound, GameObject gameObject)
+    //{
+    //    SoundType item = Array.Find(Sounds, i => i.soundType == sound);
+    //    if (item.eventReference.Path != null)
+    //    {
+    //        //item.playSound = item.eventReference.Path;
+    //        FMOD.GUID guid = item.eventReference.Guid;
+    //        Music = RuntimeManager.CreateInstance(guid);
+    //        Music.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject));
+    //        Music.start();
+    //        Music.release();
+    //        return;
+    //    }
+    //    Debug.LogError("Clip not found on soundType: " + sound);
+    //}
+    public void PlayMusic(Sounds sound, GameObject gameObject)
     {
+        StopSound();
         SoundType item = Array.Find(Sounds, i => i.soundType == sound);
         if (item.eventReference.Path != null)
         {
-            item.sfxEvent = item.eventReference.Path;
-            Music = RuntimeManager.CreateInstance(item.sfxEvent);
-            Music.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(this.transform));
-            Music.start();
-            Music.release();
+            var eventDescription = FMODUnity.RuntimeManager.GetEventDescription(item.eventReference);
+            eventDescription.unloadSampleData();
+            eventDescription.loadSampleData();
+            var eventInstance = FMODUnity.RuntimeManager.CreateInstance(item.eventReference);
+            Music = eventInstance;
+            eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+            eventInstance.setCallback(eventCallback);
+            eventInstance.start();
             return;
         }
         Debug.LogError("Clip not found on soundType: " + sound);
+    }
+    public void StopSound()
+    {
+        Music.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 }
 
@@ -65,7 +86,7 @@ public class SoundType
 {
     public Sounds soundType;
     public EventReference eventReference;
-    public string sfxEvent = null;
+    public string playSound = null;
 }
 public enum Sounds
 {
@@ -74,7 +95,8 @@ public enum Sounds
     LevelSelection,
     Music,
     PlayerMove,
-    PlayerDeath
+    PlayerDeath,
+    Scene01,
     //EnemyDeath,
     //GameMusic_scene1,
 }
