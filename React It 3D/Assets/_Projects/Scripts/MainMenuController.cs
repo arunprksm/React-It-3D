@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject optionPanel;
+    
     private void Start()
     {
         optionPanel.SetActive(false);
+        AudioManager.Instance.PlayMusic(Sounds.Music);
     }
+    
     public void PlayButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

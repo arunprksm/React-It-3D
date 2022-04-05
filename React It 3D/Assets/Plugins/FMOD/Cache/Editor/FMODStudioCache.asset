@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: Assets/Fmod/React It 3D-Fmod/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637842811605970820
+  lastModified: 637847917961973097
   FileSizes:
   - Name: Desktop
-    Value: 866
+    Value: 914
   Exists: 1
 --- !u!114 &-4281951058708396913
 MonoBehaviour:
@@ -35,7 +35,7 @@ MonoBehaviour:
   Path: Assets/Fmod/React It 3D-Fmod/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637842811605920736
+  lastModified: 637847917961953181
   FileSizes:
   - Name: Desktop
     Value: 2320160
@@ -82,6 +82,7 @@ MonoBehaviour:
   EditorBanks:
   - {fileID: -4764800144884032540}
   - {fileID: -4281951058708396913}
+  - {fileID: 4492200746648178087}
   EditorEvents:
   - {fileID: -2815706523768328391}
   - {fileID: 2773773978657059265}
@@ -91,7 +92,7 @@ MonoBehaviour:
   - {fileID: -4281951058708396913}
   StringsBanks:
   - {fileID: -4764800144884032540}
-  cacheTime: 637842811605970820
+  cacheTime: 637847917962222430
   cacheVersion: 10
 --- !u!114 &2773773978657059265
 MonoBehaviour:
@@ -113,6 +114,7 @@ MonoBehaviour:
     Data4: -1822181227
   Banks:
   - {fileID: -4281951058708396913}
+  - {fileID: 4492200746648178087}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -147,3 +149,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 999
+--- !u!114 &4492200746648178087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/React It 3D-Fmod/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 637847917962222430
+  FileSizes:
+  - Name: Desktop
+    Value: 2306976
+  Exists: 1

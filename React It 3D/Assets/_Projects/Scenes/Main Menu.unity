@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
+  attenuationObject: {fileID: 138745614}
   ListenerNumber: -1
 --- !u!20 &79365003
 Camera:
@@ -455,6 +455,15 @@ MonoBehaviour:
         Data3: 1086139021
         Data4: -1359722355
       Path: event:/UI_OptionClose
+    sfxEvent: 
+  - soundType: 3
+    eventReference:
+      Guid:
+        Data1: -206896360
+        Data2: 1222721428
+        Data3: -263207513
+        Data4: -1822181227
+      Path: event:/MainMenuMusic
     sfxEvent: 
 --- !u!1 &148254336
 GameObject:
