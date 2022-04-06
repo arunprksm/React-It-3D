@@ -10,9 +10,5 @@ public class Scene1 : MonoBehaviour
         AudioManager.Instance.PlayMusic(Sounds.Scene01, this.gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
 }

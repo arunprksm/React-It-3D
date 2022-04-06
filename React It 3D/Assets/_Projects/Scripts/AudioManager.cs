@@ -16,10 +16,9 @@ public class AudioManager : MonoBehaviour
         }
     }
     [SerializeField] private SoundType[] Sounds;
-    //internal FMOD.Studio.EventInstance Music;
 
-    private FMOD.Studio.EVENT_CALLBACK eventCallback;
     private FMOD.Studio.EventInstance Music;
+    private FMOD.Studio.EVENT_CALLBACK eventCallback;
 
     private void Awake()
     {
@@ -42,21 +41,7 @@ public class AudioManager : MonoBehaviour
         }
         Debug.LogError("Clip not found on soundType: " + sound);
     }
-    //public void PlayMusic(Sounds sound, GameObject gameObject)
-    //{
-    //    SoundType item = Array.Find(Sounds, i => i.soundType == sound);
-    //    if (item.eventReference.Path != null)
-    //    {
-    //        //item.playSound = item.eventReference.Path;
-    //        FMOD.GUID guid = item.eventReference.Guid;
-    //        Music = RuntimeManager.CreateInstance(guid);
-    //        Music.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject));
-    //        Music.start();
-    //        Music.release();
-    //        return;
-    //    }
-    //    Debug.LogError("Clip not found on soundType: " + sound);
-    //}
+    
     public void PlayMusic(Sounds sound, GameObject gameObject)
     {
         StopSound();
@@ -66,11 +51,10 @@ public class AudioManager : MonoBehaviour
             var eventDescription = FMODUnity.RuntimeManager.GetEventDescription(item.eventReference);
             eventDescription.unloadSampleData();
             eventDescription.loadSampleData();
-            var eventInstance = FMODUnity.RuntimeManager.CreateInstance(item.eventReference);
-            Music = eventInstance;
-            eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-            eventInstance.setCallback(eventCallback);
-            eventInstance.start();
+            Music = FMODUnity.RuntimeManager.CreateInstance(item.eventReference);
+            Music.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+            Music.setCallback(eventCallback);
+            Music.start();
             return;
         }
         Debug.LogError("Clip not found on soundType: " + sound);
