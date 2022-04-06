@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -15,8 +16,11 @@ public class AudioManager : MonoBehaviour
             return instance;
         }
     }
-    [SerializeField] private SoundType[] Sounds;
+    [Header("Volume")]
+    [SerializeField] internal Slider musicVolumeSlider;
+    [SerializeField] internal Slider sfxVolumeSlider;
 
+    [SerializeField] private SoundType[] Sounds;
     private FMOD.Studio.EventInstance Music;
     private FMOD.Studio.EVENT_CALLBACK eventCallback;
 
@@ -30,6 +34,27 @@ public class AudioManager : MonoBehaviour
         }
         Destroy(gameObject);
     }
+    private void Start()
+    {
+        CurrentVolume();
+        SetVolume();
+    }
+    private void Update()
+    {
+        SetVolume();
+    }
+    private void CurrentVolume()
+    {
+        musicVolumeSlider.value = GameManager.Instance.currentMusicVolume;
+        sfxVolumeSlider.value = GameManager.Instance.currentSfxVolume;
+    }
+
+    private void SetVolume()
+    {
+        GameManager.Instance.currentMusicVolume = musicVolumeSlider.value;
+        GameManager.Instance.currentSfxVolume = sfxVolumeSlider.value;
+        //Music.setVolume(musicVolumeSlider.value);
+    }
     public void PlaySFX(Sounds sound)
     {
         SoundType item = Array.Find(Sounds, i => i.soundType == sound);
@@ -41,7 +66,7 @@ public class AudioManager : MonoBehaviour
         }
         Debug.LogError("Clip not found on soundType: " + sound);
     }
-    
+
     public void PlayMusic(Sounds sound, GameObject gameObject)
     {
         StopSound();
