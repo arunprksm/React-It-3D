@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using FMODUnity;
 
 public class AudioManager : MonoBehaviour
 {
-
     private static AudioManager instance;
     public static AudioManager Instance
     {
@@ -15,13 +15,23 @@ public class AudioManager : MonoBehaviour
             return instance;
         }
     }
+
+    [Header("VolumeControl")]
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private Slider sfxVolumeSlider;
+    private float musicVolume;
+    private float sfxVolume;
+
     [SerializeField] private SoundType[] Sounds;
-    //internal FMOD.Studio.EventInstance Music;
-
+    private FMOD.Studio.EventInstance playMusic;
+    private FMOD.Studio.EventInstance playSfx;
     private FMOD.Studio.EVENT_CALLBACK eventCallback;
-    private FMOD.Studio.EventInstance Music;
-
     private void Awake()
+    {
+        InitializeOnAwake();
+    }
+
+    private void InitializeOnAwake()
     {
         if (instance == null)
         {
@@ -31,53 +41,61 @@ public class AudioManager : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
+    private void Start()
+    {
+        CurrentVolume();
+    }
+    private void Update()
+    {
+        SetVolume();
+    }
+    private void CurrentVolume()
+    {
+
+        musicVolumeSlider.value = GameManager.Instance.currentMusicVolume;
+        sfxVolumeSlider.value = GameManager.Instance.currentSfxVolume;
+        
+    }
+    private void SetVolume()
+    {
+        GameManager.Instance.currentMusicVolume = musicVolumeSlider.value;
+        GameManager.Instance.currentSfxVolume = sfxVolumeSlider.value;
+        playMusic.setVolume(GameManager.Instance.musicVolume);
+        
+        
+    }
     public void PlaySFX(Sounds sound)
     {
         SoundType item = Array.Find(Sounds, i => i.soundType == sound);
-        if (item.playSound != null)
+        if (item.eventReference.Path != null)
         {
-            item.playSound = item.eventReference.Path;
-            RuntimeManager.PlayOneShot(item.playSound);
+            RuntimeManager.PlayOneShot(item.eventReference.Path);
             return;
         }
         Debug.LogError("Clip not found on soundType: " + sound);
     }
-    //public void PlayMusic(Sounds sound, GameObject gameObject)
-    //{
-    //    SoundType item = Array.Find(Sounds, i => i.soundType == sound);
-    //    if (item.eventReference.Path != null)
-    //    {
-    //        //item.playSound = item.eventReference.Path;
-    //        FMOD.GUID guid = item.eventReference.Guid;
-    //        Music = RuntimeManager.CreateInstance(guid);
-    //        Music.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject));
-    //        Music.start();
-    //        Music.release();
-    //        return;
-    //    }
-    //    Debug.LogError("Clip not found on soundType: " + sound);
-    //}
     public void PlayMusic(Sounds sound, GameObject gameObject)
     {
         StopSound();
         SoundType item = Array.Find(Sounds, i => i.soundType == sound);
         if (item.eventReference.Path != null)
         {
-            var eventDescription = FMODUnity.RuntimeManager.GetEventDescription(item.eventReference);
+            var eventDescription = RuntimeManager.GetEventDescription(item.eventReference);
             eventDescription.unloadSampleData();
             eventDescription.loadSampleData();
-            var eventInstance = FMODUnity.RuntimeManager.CreateInstance(item.eventReference);
-            Music = eventInstance;
-            eventInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-            eventInstance.setCallback(eventCallback);
-            eventInstance.start();
+            var eventInstance = RuntimeManager.CreateInstance(item.eventReference);
+            playMusic = eventInstance;
+            playMusic.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject));
+            playMusic.setCallback(eventCallback);
+            playMusic.start();
             return;
         }
         Debug.LogError("Clip not found on soundType: " + sound);
     }
     public void StopSound()
     {
-        Music.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        playMusic.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 }
 
@@ -86,7 +104,6 @@ public class SoundType
 {
     public Sounds soundType;
     public EventReference eventReference;
-    public string playSound = null;
 }
 public enum Sounds
 {

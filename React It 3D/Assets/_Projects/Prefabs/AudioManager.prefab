@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6225183135540428707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6225183135540428706}
+  - component: {fileID: 6225183135540428733}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6225183135540428706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6225183135540428707}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 42.403137, y: 503.09113, z: -25.566605}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6225183135540428733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6225183135540428707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a0795c0021367646873f7ee28f712a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - soundType: 0
+    eventReference:
+      Guid:
+        Data1: 2057971219
+        Data2: 1138769045
+        Data3: 549379005
+        Data4: 344019991
+      Path: event:/UI_Play
+    playSound: 
+  - soundType: 1
+    eventReference:
+      Guid:
+        Data1: 610728132
+        Data2: 1339260820
+        Data3: 1086139021
+        Data4: -1359722355
+      Path: event:/UI_OptionClose
+    playSound: 
+  - soundType: 3
+    eventReference:
+      Guid:
+        Data1: -206896360
+        Data2: 1222721428
+        Data3: -263207513
+        Data4: -1822181227
+      Path: event:/MainMenuMusic
+    playSound: 
+  - soundType: 6
+    eventReference:
+      Guid:
+        Data1: 1490148129
+        Data2: 1091335720
+        Data3: 320603037
+        Data4: 152160156
+      Path: event:/Scene01_Music
+    playSound: 
