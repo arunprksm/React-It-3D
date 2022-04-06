@@ -51,7 +51,7 @@ public class AudioManager : MonoBehaviour
             var eventDescription = FMODUnity.RuntimeManager.GetEventDescription(item.eventReference);
             eventDescription.unloadSampleData();
             eventDescription.loadSampleData();
-            Music = FMODUnity.RuntimeManager.CreateInstance(item.eventReference);
+            Music = RuntimeManager.CreateInstance(item.eventReference);
             Music.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
             Music.setCallback(eventCallback);
             Music.start();

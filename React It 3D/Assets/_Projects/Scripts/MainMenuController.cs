@@ -13,8 +13,8 @@ public class MainMenuController : MonoBehaviour
     
     public void PlayButton()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         AudioManager.Instance.PlaySFX(Sounds.ButtonClick);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void OptionButton()
     {
