@@ -16,9 +16,17 @@ public class AudioManager : MonoBehaviour
             return instance;
         }
     }
+
+    private static readonly string firstPlay = "FirstPlay";
+    private static readonly string musicVolumePref = "musicVolumePref";
+    private static readonly string sfxVolumePref = "sfxVolumePref";
+    private int firstPlayInt;
+
     [Header("Volume")]
     [SerializeField] internal Slider musicVolumeSlider;
     [SerializeField] internal Slider sfxVolumeSlider;
+    private float musicVolume, sfxVolume;
+
 
     [SerializeField] private SoundType[] Sounds;
     private FMOD.Studio.EventInstance Music;
@@ -36,24 +44,40 @@ public class AudioManager : MonoBehaviour
     }
     private void Start()
     {
-        CurrentVolume();
-        SetVolume();
-    }
-    private void Update()
-    {
-        SetVolume();
-    }
-    private void CurrentVolume()
-    {
-        musicVolumeSlider.value = GameManager.Instance.currentMusicVolume;
-        sfxVolumeSlider.value = GameManager.Instance.currentSfxVolume;
+        VolumeControl();
     }
 
-    private void SetVolume()
+    void VolumeControl()
     {
-        GameManager.Instance.currentMusicVolume = musicVolumeSlider.value;
-        GameManager.Instance.currentSfxVolume = sfxVolumeSlider.value;
-        //Music.setVolume(musicVolumeSlider.value);
+        firstPlayInt = PlayerPrefs.GetInt(firstPlay);
+        if(firstPlayInt == 0)
+        {
+            musicVolume = 0.5f;
+            sfxVolume = 0.5f;
+            musicVolumeSlider.value = musicVolume;
+            sfxVolumeSlider.value = sfxVolume;
+            PlayerPrefs.SetFloat(musicVolumePref, musicVolume); //PlayerPrefs used to save Values
+            PlayerPrefs.SetFloat(sfxVolumePref, sfxVolume);
+            PlayerPrefs.SetInt(firstPlay, -1);
+            return;
+        }
+        musicVolume = PlayerPrefs.GetFloat(musicVolumePref);
+        musicVolumeSlider.value = musicVolume;
+        sfxVolume = PlayerPrefs.GetFloat (sfxVolumePref);
+        sfxVolumeSlider.value = sfxVolume;
+    }
+    public void SaveSoundSetings()
+    {
+        PlayerPrefs.SetFloat(musicVolumePref, musicVolumeSlider.value);
+        PlayerPrefs.SetFloat(sfxVolumePref, sfxVolumeSlider.value);
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            SaveSoundSetings();
+        }
     }
     public void PlaySFX(Sounds sound)
     {
