@@ -25,12 +25,12 @@ public class AudioManager : MonoBehaviour
     [Header("Volume")]
     [SerializeField] internal Slider musicVolumeSlider;
     [SerializeField] internal Slider sfxVolumeSlider;
-    private float musicVolume, sfxVolume;
+    //private float musicVolume, sfxVolume;
 
 
     [SerializeField] private SoundType[] Sounds;
     private FMOD.Studio.EventInstance Music;
-    private FMOD.Studio.EVENT_CALLBACK eventCallback;
+    private readonly FMOD.Studio.EVENT_CALLBACK eventCallback;
 
     private void Awake()
     {
@@ -44,27 +44,31 @@ public class AudioManager : MonoBehaviour
     }
     private void Start()
     {
+        Music.getVolume(out GameManager.Instance.musicVolume);
         VolumeControl();
     }
-
+    private void Update()
+    {
+        UpdateSound();
+    }
     void VolumeControl()
     {
         firstPlayInt = PlayerPrefs.GetInt(firstPlay);
         if(firstPlayInt == 0)
         {
-            musicVolume = 0.5f;
-            sfxVolume = 0.5f;
-            musicVolumeSlider.value = musicVolume;
-            sfxVolumeSlider.value = sfxVolume;
-            PlayerPrefs.SetFloat(musicVolumePref, musicVolume); //PlayerPrefs used to save Values
-            PlayerPrefs.SetFloat(sfxVolumePref, sfxVolume);
+            GameManager.Instance.musicVolume = 0.5f;
+            GameManager.Instance.sfxVolume = 0.5f;
+            musicVolumeSlider.value = GameManager.Instance.musicVolume;
+            sfxVolumeSlider.value = GameManager.Instance.sfxVolume;
+            PlayerPrefs.SetFloat(musicVolumePref, GameManager.Instance.musicVolume); //PlayerPrefs used to save Values
+            PlayerPrefs.SetFloat(sfxVolumePref, GameManager.Instance.sfxVolume);
             PlayerPrefs.SetInt(firstPlay, -1);
             return;
         }
-        musicVolume = PlayerPrefs.GetFloat(musicVolumePref);
-        musicVolumeSlider.value = musicVolume;
-        sfxVolume = PlayerPrefs.GetFloat (sfxVolumePref);
-        sfxVolumeSlider.value = sfxVolume;
+        GameManager.Instance.musicVolume = PlayerPrefs.GetFloat(musicVolumePref);
+        musicVolumeSlider.value = GameManager.Instance.musicVolume;
+        GameManager.Instance.sfxVolume = PlayerPrefs.GetFloat (sfxVolumePref);
+        sfxVolumeSlider.value = GameManager.Instance.sfxVolume;
     }
     public void SaveSoundSetings()
     {
@@ -79,6 +83,12 @@ public class AudioManager : MonoBehaviour
             SaveSoundSetings();
         }
     }
+
+    public void UpdateSound()
+    {
+        Music.setVolume(musicVolumeSlider.value);
+    }
+
     public void PlaySFX(Sounds sound)
     {
         SoundType item = Array.Find(Sounds, i => i.soundType == sound);
@@ -97,11 +107,11 @@ public class AudioManager : MonoBehaviour
         SoundType item = Array.Find(Sounds, i => i.soundType == sound);
         if (item.eventReference.Path != null)
         {
-            var eventDescription = FMODUnity.RuntimeManager.GetEventDescription(item.eventReference);
+            var eventDescription = RuntimeManager.GetEventDescription(item.eventReference);
             eventDescription.unloadSampleData();
             eventDescription.loadSampleData();
             Music = RuntimeManager.CreateInstance(item.eventReference);
-            Music.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+            Music.set3DAttributes(RuntimeUtils.To3DAttributes(gameObject));
             Music.setCallback(eventCallback);
             Music.start();
             return;

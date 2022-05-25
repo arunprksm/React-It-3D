@@ -3,17 +3,20 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+    [SerializeField] private GameObject PlayMenuCanvas;
     [SerializeField] private GameObject optionPanel;
-    
+
     private void Start()
     {
         optionPanel.SetActive(false);
+        PlayMenuCanvas.SetActive(true);
         AudioManager.Instance.PlayMusic(Sounds.Music, this.gameObject);
     }
     
     public void PlayButton()
     {
         AudioManager.Instance.PlaySFX(Sounds.ButtonClick);
+        PlayMenuCanvas.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void OptionButton()
